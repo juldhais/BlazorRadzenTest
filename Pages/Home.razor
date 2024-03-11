@@ -3,18 +3,19 @@
 
 <PageTitle>Home</PageTitle>
 
-<RadzenRow class="rz-pb-6">
-    <RadzenColumn SizeMD="3">
+<h1 class="mb-4">Users</h1>
+
+<div class="row mb-4">
+    <div class="col-md-3">
         <RadzenButton Text="Create New User"></RadzenButton>
-    </RadzenColumn>
-    <RadzenColumn SizeMD="9"></RadzenColumn>
-</RadzenRow>
+    </div>
+</div>
 
 <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-    Data="@users" TItem="User" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+                Data="@users" TItem="User" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
     <Columns>
-        <RadzenDataGridColumn TItem="User" Property="Id" Filterable="false" Title="ID" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
-        <RadzenDataGridColumn TItem="User" Property="FirstName" Title="First Name" Frozen="true" Width="160px" />
+        <RadzenDataGridColumn TItem="User" Property="Id" Filterable="false" Title="ID" Width="80px" TextAlign="TextAlign.Center" />
+        <RadzenDataGridColumn TItem="User" Property="FirstName" Title="First Name" Width="160px" />
         <RadzenDataGridColumn TItem="User" Property="LastName" Title="Last Name" Width="160px" />
         <RadzenDataGridColumn TItem="User" Property="BirthDate" Title="Birth Date" FormatString="{0:d}" Width="160px" />
         <RadzenDataGridColumn TItem="User" Property="Phone" Title="Phone" Width="160px" />
@@ -23,6 +24,7 @@
         <RadzenDataGridColumn TItem="User" Property="City" Title="City" Width="160px" />
     </Columns>
 </RadzenDataGrid>
+
 
 @code {
     private List<User> users = [];
