@@ -1,0 +1,28 @@
+﻿@page "/login"
+@layout EmptyLayout
+@inject NavigationManager NavManager
+
+<PageTitle>Login</PageTitle>
+
+<RadzenStack Orientation="Orientation.Vertical" AlignItems="AlignItems.Center" class="rz-mt-12">
+    <RadzenCard style="max-width: 600px;">
+        <RadzenTemplateForm Data=@("SimpleLogin")>
+            <RadzenLogin AllowRegister="false"
+                         AllowResetPassword="false"
+                         Username=@userName
+                         Password=@password
+                         Login="DoLogin" />
+        </RadzenTemplateForm>
+    </RadzenCard>
+</RadzenStack>
+
+
+@code {
+    string userName = "admin";
+    string password = "admin";
+
+    void DoLogin()
+    {
+        NavManager.NavigateTo("/");
+    }
+}
