@@ -1,18 +1,21 @@
 ﻿@page "/"
-@inject HttpClient httpClient
+@inject StateContainer StateContainer
+@inject NavigationManager NavigationManager
 
 <PageTitle>Home</PageTitle>
 
-<h1 class="mb-4">Users</h1>
+<RadzenText TextStyle="TextStyle.DisplayH5" TagName="TagName.Div" class="pb-4">Users</RadzenText>
 
-<div class="row mb-4">
-    <div class="col-md-3">
-        <RadzenButton Text="Create New User"></RadzenButton>
-    </div>
-</div>
+<RadzenRow class="pb-4">
+    <RadzenColumn SizeMD="3">
+        <RadzenButton Text="Create New User" Click="Create"></RadzenButton>
+    </RadzenColumn>
+</RadzenRow>
 
-<RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
-                Data="@users" TItem="User" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or">
+<RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" 
+    PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+    Data="@users" TItem="User" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or"
+    class="rz-shadow-3">
     <Columns>
         <RadzenDataGridColumn TItem="User" Property="Id" Filterable="false" Title="ID" Width="80px" TextAlign="TextAlign.Center" />
         <RadzenDataGridColumn TItem="User" Property="FirstName" Title="First Name" Width="160px" />
@@ -31,6 +34,12 @@
 
     protected override void OnInitialized()
     {
+        StateContainer.AppTitle.Value = "Home";
         users = User.GetAll(100);
+    }
+
+    private void Create()
+    {
+        NavigationManager.NavigateTo("create");
     }
 }

@@ -1,0 +1,25 @@
+﻿@page "/create"
+@inject StateContainer StateContainer
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create New Users</PageTitle>
+
+<RadzenText TextStyle="TextStyle.DisplayH5" TagName="TagName.Div" class="pb-4">Create New User</RadzenText>
+
+<RadzenRow class="pb-4">
+    <RadzenColumn SizeMD="3">
+        <RadzenButton Text="Home" Click="Home"></RadzenButton>
+    </RadzenColumn>
+</RadzenRow>
+
+@code {
+    protected override void OnInitialized()
+    {
+        StateContainer.AppTitle.Value = "Create New User";
+    }
+
+    private void Home()
+    {
+        NavigationManager.NavigateTo("");
+    }
+}

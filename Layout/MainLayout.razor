@@ -1,10 +1,12 @@
 ﻿@inherits LayoutComponentBase
+@implements IDisposable
+@inject StateContainer StateContainer
 
 <RadzenLayout>
     <RadzenHeader>
         <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0">
             <RadzenSidebarToggle Click="@(() => sidebarExpanded = !sidebarExpanded)" />
-            <RadzenLabel Text="@title" />
+            <RadzenLabel Text="@StateContainer.AppTitle.Value" />
         </RadzenStack>
     </RadzenHeader>
     <RadzenSidebar @bind-Expanded="@sidebarExpanded">
@@ -21,13 +23,15 @@
 </RadzenLayout>
 
 @code {
-    string title = "";
     bool sidebarExpanded = true;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        await base.OnInitializedAsync();
+        StateContainer.AppTitle.OnChange += StateHasChanged;
+    }
 
-        title = "Blazor Test";
+    public void Dispose()
+    {
+        StateContainer.AppTitle.OnChange -= StateHasChanged;
     }
 }
